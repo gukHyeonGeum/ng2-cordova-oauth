@@ -11,6 +11,7 @@ declare module "provider" {
         appScope?: string[];
         redirectUri?: string;
         responseType?: string;
+        state?: string;
     }
     export class OAuthProvider implements IOauthProvider {
         options: IOAuthOptions;
