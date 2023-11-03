@@ -128,6 +128,17 @@ declare module "provider/linkedin" {
         protected defaults: Object;
     }
 }
+declare module "provider/naver" {
+    import { OAuthProvider, IOAuthOptions } from "provider";
+    export interface NaverOptions extends IOAuthOptions {
+    }
+    export class Naver extends OAuthProvider {
+        options: NaverOptions;
+        protected authUrl: string;
+        protected defaults: Object;
+        constructor(options?: NaverOptions);
+    }
+}
 declare module "core" {
     export * from "provider/facebook";
     export * from "provider/google";
@@ -135,6 +146,7 @@ declare module "core" {
     export * from "provider/instagram";
     export * from "provider/meetup";
     export * from "provider/linkedin";
+    export * from "provider/naver";
     export const oAuth: {
         for(type: any): any;
         detect(): any;

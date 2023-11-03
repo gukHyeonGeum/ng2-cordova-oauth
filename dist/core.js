@@ -15,6 +15,7 @@ __export(require("./provider/imgur"));
 __export(require("./provider/instagram"));
 __export(require("./provider/meetup"));
 __export(require("./provider/linkedin"));
+__export(require("./provider/naver"));
 exports.oAuth = {
     for: function (type) {
         if (typeof PLATFORMS[type] !== 'function') {

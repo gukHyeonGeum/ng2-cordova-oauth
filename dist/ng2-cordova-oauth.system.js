@@ -463,9 +463,36 @@ System.register("provider/linkedin", ["provider"], function(exports_11, context_
         }
     }
 });
-System.register("core", ["platform/browser", "platform/cordova", "provider/facebook", "provider/google", "provider/imgur", "provider/instagram", "provider/meetup", "provider/linkedin"], function(exports_12, context_12) {
+System.register("provider/naver", ["provider"], function(exports_12, context_12) {
     "use strict";
     var __moduleName = context_12 && context_12.id;
+    var provider_7;
+    var Naver;
+    return {
+        setters:[
+            function (provider_7_1) {
+                provider_7 = provider_7_1;
+            }],
+        execute: function() {
+            Naver = (function (_super) {
+                __extends(Naver, _super);
+                function Naver(options) {
+                    if (options === void 0) { options = {}; }
+                    _super.call(this, options);
+                    this.authUrl = 'https://nid.naver.com/oauth2.0/authorize';
+                    this.defaults = {
+                        responseType: 'code'
+                    };
+                }
+                return Naver;
+            }(provider_7.OAuthProvider));
+            exports_12("Naver", Naver);
+        }
+    }
+});
+System.register("core", ["platform/browser", "platform/cordova", "provider/facebook", "provider/google", "provider/imgur", "provider/instagram", "provider/meetup", "provider/linkedin", "provider/naver"], function(exports_13, context_13) {
+    "use strict";
+    var __moduleName = context_13 && context_13.id;
     var browser_1, cordova_1;
     var PLATFORMS, oAuth;
     var exportedNames_1 = {
@@ -476,7 +503,7 @@ System.register("core", ["platform/browser", "platform/cordova", "provider/faceb
         for(var n in m) {
             if (n !== "default"&& !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
         }
-        exports_12(exports);
+        exports_13(exports);
     }
     return {
         setters:[
@@ -503,6 +530,9 @@ System.register("core", ["platform/browser", "platform/cordova", "provider/faceb
             },
             function (linkedin_1_1) {
                 exportStar_1(linkedin_1_1);
+            },
+            function (naver_1_1) {
+                exportStar_1(naver_1_1);
             }],
         execute: function() {
             PLATFORMS = {
@@ -510,7 +540,7 @@ System.register("core", ["platform/browser", "platform/cordova", "provider/faceb
                 web: browser_1.OauthBrowser,
                 cordova: cordova_1.OauthCordova
             };
-            exports_12("oAuth", oAuth = {
+            exports_13("oAuth", oAuth = {
                 for: function (type) {
                     if (typeof PLATFORMS[type] !== 'function') {
                         throw new Error("Unknown oAuth platform type: " + type);
@@ -518,7 +548,6 @@ System.register("core", ["platform/browser", "platform/cordova", "provider/faceb
                     if (!PLATFORMS.instances[type]) {
                         PLATFORMS.instances[type] = new PLATFORMS[type]();
                     }
-
                     return PLATFORMS.instances[type];
                 },
                 detect: function () {
